@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import { AuthProvider } from "./context/AuthContext";
+import { LoggedInContext } from "./context/LoggedInContext";
+import CreateUser from "./pages/CreateUser";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import StartPage from "./pages/StartPage";
 
 function App() {
+  const [userLoggedIn] = useState(false);
+  //const test = useContext(LoggedInContext);
+  useEffect(() => {
+    // console.log(test);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LoggedInContext.Provider value={userLoggedIn}>
+      <AuthProvider>
+        <BrowserRouter className="App">
+          <Routes>
+            <Route path="/" element={<StartPage />} />
+            <Route path="/minSide" element={<Dashboard />} />
+            <Route path="/opretBruger" element={<CreateUser />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </LoggedInContext.Provider>
   );
 }
 

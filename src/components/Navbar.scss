@@ -1,0 +1,23 @@
+nav {
+  margin-top: 3em;
+  margin-bottom: 3em;
+  ul {
+    display: flex;
+    justify-content: space-evenly;
+    .searchBar {
+      border: 1px black solid;
+      width: 20%;
+      text-align: center;
+    }
+    li {
+      list-style: none;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      a:hover {
+        color: gray;
+      }
+    }
+  }
+}
