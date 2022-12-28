@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
 
@@ -69,6 +69,8 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      <Link to="/createProduct">Opret produkt her!</Link>
 
       <button
         onClick={() => {

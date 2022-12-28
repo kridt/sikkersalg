@@ -24,6 +24,7 @@ export default function Login() {
       navigate("/minSide");
     } catch (error) {
       alert(error);
+      setLoading(false);
     }
 
     console.log(currentUser);
