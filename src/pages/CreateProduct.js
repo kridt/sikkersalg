@@ -1,26 +1,55 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
+import { useAuth } from "../context/AuthContext";
+import { database } from "../firebase";
 
 export default function CreateProduct() {
   const [loading, setLoading] = useState(false);
-
-  function handleSubmit(e) {
+  const { currentUser } = useAuth();
+  const navgate = useNavigate();
+  async function handleSubmit(e) {
     e.preventDefault();
-
+    setLoading(true);
+    console.log(crypto.randomUUID());
     const productInfo = {
       productName: e.target.productName.value,
       productBrand: e.target.productBrand.value,
       productColor: e.target.productColor.value,
-      productPrice: e.target.productPrice.value,
+      productPrice: parseFloat(e.target.productPrice.value),
       productDescription: e.target.productDescription.value,
-      productImage: e.target.productImage.value,
+      productImage: "https://picsum.photos/200",
       productCategory: e.target.productCategory.value,
       productCondition: e.target.productCondition.value,
       productReceipt: e.target.productReceipt.value,
+      productId: crypto.randomUUID(),
+      userId: currentUser.uid,
     };
 
-    console.log(productInfo);
+    try {
+      database
+        .collection("products")
+        .doc(productInfo.productId)
+        .set(productInfo)
+        .then(() => {
+          database
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("products")
+            .doc(productInfo.productId)
+            .set(productInfo)
+            .then(() => {
+              console.log("product added to user");
+              setLoading(false);
+            });
+        });
+      console.log(productInfo);
+      navgate("/minSide");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   }
   return (
     <div>
