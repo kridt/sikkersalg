@@ -7,6 +7,7 @@ import CreateProduct from "./pages/CreateProduct";
 import CreateUser from "./pages/CreateUser";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import ProductPage from "./pages/ProductPage";
 import StartPage from "./pages/StartPage";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/opretBruger" element={<CreateUser />} />
             <Route path="/login" element={<Login />} />
             <Route path="/createProduct" element={<CreateProduct />} />
+            <Route path="/productPage/:id" element={<ProductPage />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

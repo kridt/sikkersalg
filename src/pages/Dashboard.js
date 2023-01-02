@@ -29,7 +29,7 @@ export default function Dashboard() {
       .onSnapshot((snapshot) => {
         setMyProducts(snapshot.docs.map((doc) => doc.data()));
       });
-  }, [currentUser.uid]);
+  }, [currentUser?.uid]);
   console.log(myProducts);
   function handleValidateEmail() {
     console.log("validate pressed");
