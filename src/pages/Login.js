@@ -11,7 +11,6 @@ export default function Login() {
 
   async function handleLogIn(e) {
     e.preventDefault();
-
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -35,24 +34,31 @@ export default function Login() {
       <h1>Log ind på Sikker salg</h1>
 
       <form onSubmit={(e) => handleLogIn(e)}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" name="email" />
-        </div>
-        <div>
-          <label htmlFor="password">Adgangskode:</label>
-          <input type="password" name="password" />
-        </div>
-        <input
-          disabled={loading}
-          className="submit"
-          type="submit"
-          value="Log Ind"
-        />
-
+        <label htmlFor="email">Email:</label>
+        <br />
+        <input type="email" id="email" name="email" />
+        <br />
+        <label htmlFor="password">Password:</label>
+        <br />
+        <input type="password" id="password" name="password" />
+        <br />
+        <br />
+        <button type="submit">Log In</button>
         <p>
           Har du ikke en profil? Lav en <Link to={"/opretBruger"}>Her</Link>
         </p>
+
+        <div
+          style={{
+            marginTop: "2em",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <button className="fb-button">Log in with Facebook</button>
+
+          <button className="google-button">Log in with Google</button>
+        </div>
       </form>
     </div>
   );
